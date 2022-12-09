@@ -14,7 +14,7 @@ Movie Application - React.js, Typescript, Material-UI , AWS Amplify, The Movie D
 
 #### Authentication Service
 
-- Aws Amplify
+- Aws Cognito
 
 #### API Source
 
@@ -22,4 +22,4 @@ Movie Application - React.js, Typescript, Material-UI , AWS Amplify, The Movie D
 
 #### Host
 
-- Google Firebase - Link -> https://dev.d1k1o8vw5h0khr.amplifyapp.com/
+- AWS EC2 - Link -> https://dev.d1k1o8vw5h0khr.amplifyapp.com/
