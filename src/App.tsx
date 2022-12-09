@@ -1,26 +1,17 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import image from "./assets/img/background.webp";
 
-function App() {
+const LandingPage: React.FunctionComponent = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <div>
+        <div>Logo</div>
+        <div>Menu</div>
+      </div>
+
+      <img src={image} className='App-logo' alt='logo' />
     </div>
   );
-}
+};
 
-export default App;
+export default LandingPage;
