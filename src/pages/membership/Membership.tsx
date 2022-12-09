@@ -1,10 +1,16 @@
 import React from "react";
-import { withAuthenticator } from "@aws-amplify/ui-react";
+import { Grid, Box } from "@mui/material";
 
-import { MembershipProps } from "./types";
+import Authenticator from "../../components/Authenticator/Authenticator";
 
-const MembershipPage: React.FunctionComponent<MembershipProps> = ({ user }) => {
-  return <></>;
+const MembershipPage: React.FunctionComponent = () => {
+  return (
+    <Grid>
+      <Box>
+        <Authenticator />
+      </Box>
+    </Grid>
+  );
 };
 
-export default withAuthenticator(MembershipPage);
+export default MembershipPage;
