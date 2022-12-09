@@ -29,7 +29,13 @@ const TopBar: React.FunctionComponent = () => {
       sx={{ position: "fixed", padding: "20px", backgroundColor: "#000000" }}
     >
       <Box>
-        <Typography color='red' variant='h3' fontWeight='bold'>
+        <Typography
+          sx={{ cursor: "pointer" }}
+          color='red'
+          variant='h3'
+          fontWeight='bold'
+          onClick={() => navigate("/browse")}
+        >
           MUVI
         </Typography>
       </Box>

@@ -18,7 +18,7 @@ Movie Application - React.js, Typescript, Material-UI , AWS Amplify, The Movie D
 
 #### API Source
 
-- The Movie Database API (https://developers.themoviedb.org/)
+- Omdb API -> (http://omdbapi.com/)
 
 #### Host
 

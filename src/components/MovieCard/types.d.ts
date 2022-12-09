@@ -1,4 +1,5 @@
 export type MovieCardProps = {
     title:string,
-    url:strin
+    url:string,
+    imdbID:string
 }
