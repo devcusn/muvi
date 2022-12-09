@@ -6,7 +6,7 @@ export const getMovies = async (movieName:string) => {
     return axios({
             method: 'get',
             url: `${api}`,
-            params: {s:movieName,page:1}
+            params: {s:movieName}
         }).then(function (response) {
             return response
         })
@@ -15,7 +15,7 @@ export const getSeries = async (seriesName:string) => {
     return axios({
             method: 'get',
             url: `${api}`,
-            params: {s:seriesName,page:1}
+            params: {s:seriesName}
         }).then(function (response) {
             return response
         })

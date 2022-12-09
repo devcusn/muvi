@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Hub } from "aws-amplify";
-
 const Guard: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isAuth, setIsAuth] = useState<boolean>(false);
 
