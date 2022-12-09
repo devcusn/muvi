@@ -1,18 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  Typography,
-  Box,
-  Grid,
-  Button,
-  Input,
-  IconButton,
-} from "@mui/material";
+import { Typography, Box, Grid, Input, IconButton } from "@mui/material";
 import { ExitToApp } from "@mui/icons-material";
 import { Auth } from "aws-amplify";
 
 const TopBar: React.FunctionComponent = () => {
   const navigate = useNavigate();
+
   const exit = async () => {
     try {
       await Auth.signOut();
@@ -41,14 +35,25 @@ const TopBar: React.FunctionComponent = () => {
       </Box>
 
       <Box sx={{ flex: 2, color: "red", marginLeft: "20px" }}>
-        <Button sx={{ color: "red" }}>Movies</Button>
-        <Button sx={{ color: "red" }}>Series</Button>
+        <Typography
+          sx={{
+            cursor: "pointer",
+            fontSize: "15px",
+            color: "#ffffff",
+            fontWeight: "bold",
+          }}
+        >
+          Lay Back And Watch
+        </Typography>
       </Box>
       <Box sx={{ flex: 3 }}>
         <Input
           color='secondary'
           sx={{ width: "100%" }}
           placeholder='Search Movies or Series'
+          onClick={() => {
+            navigate("/explore");
+          }}
         />
       </Box>
       <Box
