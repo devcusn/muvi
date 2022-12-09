@@ -1,7 +1,10 @@
 import React from "react";
+import { withAuthenticator } from "@aws-amplify/ui-react";
 
-const MembershipPage: React.FunctionComponent = () => {
-  return <div>Membership Page</div>;
+import { MembershipProps } from "./types";
+
+const MembershipPage: React.FunctionComponent<MembershipProps> = ({ user }) => {
+  return <></>;
 };
 
-export default MembershipPage;
+export default withAuthenticator(MembershipPage);
