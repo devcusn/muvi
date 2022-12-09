@@ -1,8 +1,12 @@
 import React from "react";
-import { Box, styled, Grid, Typography, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { Box, Grid, Typography, Button } from "@mui/material";
+
 import image from "../../assets/img/background.webp";
 
 const LandingPage: React.FunctionComponent = () => {
+  const navigate = useNavigate();
+
   return (
     <Grid sx={{ backgroundColor: "rgba(0,0,0,0.5)", minHeight: "100vh" }}>
       <Grid
@@ -20,7 +24,10 @@ const LandingPage: React.FunctionComponent = () => {
           </Typography>
         </Grid>
         <Box>
-          <Button sx={{ fontSize: "23px", color: "red", width: "150px" }}>
+          <Button
+            onClick={() => navigate("membership")}
+            sx={{ fontSize: "23px", color: "red", width: "150px" }}
+          >
             Login
           </Button>
         </Box>
@@ -47,13 +54,13 @@ const LandingPage: React.FunctionComponent = () => {
         </Box>
         <Box sx={{ fontSize: "40px", marginTop: "30px" }}>
           <Button sx={{ color: "red", fontSize: "25px", fontWeight: "bold" }}>
-            Family{" "}
+            Family
           </Button>
           <Button sx={{ color: "red", fontSize: "25px", fontWeight: "bold" }}>
-            Student{" "}
+            Student
           </Button>
           <Button sx={{ color: "red", fontSize: "25px", fontWeight: "bold" }}>
-            Account{" "}
+            Account
           </Button>
         </Box>
       </Grid>
