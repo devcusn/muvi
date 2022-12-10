@@ -42,13 +42,24 @@ const BrowsePage: React.FunctionComponent = () => {
     seriesServices();
     randomServices();
   }, []);
-  console.log(random);
+
   const Movies = movies.map((movie) => (
-    <MovieCard title={movie.Title} url={movie.Poster} imdbID={movie.imdbID} />
+    <MovieCard
+      title={movie.Title}
+      url={movie.Poster}
+      imdbID={movie.imdbID}
+      key={movie.imdbID}
+    />
   ));
   const Series = series.map((serie) => (
-    <MovieCard title={serie.Title} url={serie.Poster} imdbID={serie.imdbID} />
+    <MovieCard
+      title={serie.Title}
+      url={serie.Poster}
+      imdbID={serie.imdbID}
+      key={serie.imdbID}
+    />
   ));
+
   return (
     <Layout>
       <Title title='Movies' subtitle='Recommended for you' />

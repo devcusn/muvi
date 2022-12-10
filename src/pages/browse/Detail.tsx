@@ -1,11 +1,11 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 import Layout from "../../layout/Layout";
 
 const DetailPage: React.FunctionComponent = () => {
-  const location = useLocation();
-  console.log(location);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const movieID = searchParams.get("id");
 
   return (
     <Layout>

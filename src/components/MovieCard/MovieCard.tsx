@@ -12,7 +12,7 @@ const MovieCard: React.FunctionComponent<MovieCardProps> = ({
   const navigate = useNavigate();
   return (
     <Box
-      sx={{ width: "300px", backgroundColor: "#181818" }}
+      sx={{ width: "300px", backgroundColor: "#181818", cursor: "pointer" }}
       onClick={() => {
         navigate(`/detail?id=${imdbID}`);
       }}
