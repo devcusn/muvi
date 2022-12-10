@@ -27,13 +27,15 @@ const DetailPage: React.FunctionComponent = () => {
 
   const addFavorite = async () => {
     setAddFavorite(true);
-
-    const newFavorite = await API.graphql({
-      query: mutations.createFavoriteMovie,
-      variables: { input: { movieID: movieID } },
-      authMode: "AMAZON_COGNITO_USER_POOLS",
-    });
-    console.log(newFavorite);
+    try {
+      const newFavorite = await API.graphql({
+        query: mutations.createFavoriteMovie,
+        variables: { input: { movieID: movieID } },
+        authMode: "AMAZON_COGNITO_USER_POOLS",
+      });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const movieService = useCallback(async () => {
