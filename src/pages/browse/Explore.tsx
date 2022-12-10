@@ -1,9 +1,14 @@
 import React from "react";
+import { useSearchParams } from "react-router-dom";
 
 import Layout from "../../layout/Layout";
 
 const ExplorePage: React.FunctionComponent = () => {
-  console.log("hello");
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const searchValue = searchParams.get("s");
+
+  const searchList = () => {};
   return (
     <Layout>
       <div>Explore Page</div>

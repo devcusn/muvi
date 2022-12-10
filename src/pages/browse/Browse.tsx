@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Box, Grid, Typography } from "@mui/material";
 
-import { getMovies, getRandom, getSeries } from "../../services/endpoints";
 import Layout from "../../layout/Layout";
 import MovieCard from "../../components/MovieCard/MovieCard";
-import { Movie } from "../../services/types";
 import Title from "../../components/Title/Title";
 import ScrollList from "../../components/ScrollList/ScrollList";
+
+import { getMovies, getSeries } from "../../services/endpoints";
+import { Movie } from "../../services/types";
 
 const BrowsePage: React.FunctionComponent = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [series, setSeries] = useState<Movie[]>([]);
-  const [random, setRandom] = useState<Movie>();
 
   const moviesServices = async () => {
     try {
@@ -29,18 +28,10 @@ const BrowsePage: React.FunctionComponent = () => {
       console.log(err);
     }
   };
-  const randomServices = async () => {
-    try {
-      const res = await getRandom("random");
-      setRandom(res.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+
   useEffect(() => {
     moviesServices();
     seriesServices();
-    randomServices();
   }, []);
 
   const Movies = movies.map((movie) => (
