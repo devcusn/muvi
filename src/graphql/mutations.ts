@@ -2,45 +2,90 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createTodo = /* GraphQL */ `
-  mutation CreateTodo(
-    $input: CreateTodoInput!
-    $condition: ModelTodoConditionInput
+export const createMessages = /* GraphQL */ `
+  mutation CreateMessages(
+    $input: CreateMessagesInput!
+    $condition: ModelMessagesConditionInput
   ) {
-    createTodo(input: $input, condition: $condition) {
+    createMessages(input: $input, condition: $condition) {
       id
-      name
-      description
+      message
+      movieID
       createdAt
       updatedAt
+      owner
     }
   }
 `;
-export const updateTodo = /* GraphQL */ `
-  mutation UpdateTodo(
-    $input: UpdateTodoInput!
-    $condition: ModelTodoConditionInput
+export const updateMessages = /* GraphQL */ `
+  mutation UpdateMessages(
+    $input: UpdateMessagesInput!
+    $condition: ModelMessagesConditionInput
   ) {
-    updateTodo(input: $input, condition: $condition) {
+    updateMessages(input: $input, condition: $condition) {
       id
-      name
-      description
+      message
+      movieID
       createdAt
       updatedAt
+      owner
     }
   }
 `;
-export const deleteTodo = /* GraphQL */ `
-  mutation DeleteTodo(
-    $input: DeleteTodoInput!
-    $condition: ModelTodoConditionInput
+export const deleteMessages = /* GraphQL */ `
+  mutation DeleteMessages(
+    $input: DeleteMessagesInput!
+    $condition: ModelMessagesConditionInput
   ) {
-    deleteTodo(input: $input, condition: $condition) {
+    deleteMessages(input: $input, condition: $condition) {
       id
-      name
-      description
+      message
+      movieID
       createdAt
       updatedAt
+      owner
+    }
+  }
+`;
+export const createFavoriteMovie = /* GraphQL */ `
+  mutation CreateFavoriteMovie(
+    $input: CreateFavoriteMovieInput!
+    $condition: ModelFavoriteMovieConditionInput
+  ) {
+    createFavoriteMovie(input: $input, condition: $condition) {
+      id
+      movieID
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const updateFavoriteMovie = /* GraphQL */ `
+  mutation UpdateFavoriteMovie(
+    $input: UpdateFavoriteMovieInput!
+    $condition: ModelFavoriteMovieConditionInput
+  ) {
+    updateFavoriteMovie(input: $input, condition: $condition) {
+      id
+      movieID
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const deleteFavoriteMovie = /* GraphQL */ `
+  mutation DeleteFavoriteMovie(
+    $input: DeleteFavoriteMovieInput!
+    $condition: ModelFavoriteMovieConditionInput
+  ) {
+    deleteFavoriteMovie(input: $input, condition: $condition) {
+      id
+      movieID
+      createdAt
+      updatedAt
+      owner
     }
   }
 `;

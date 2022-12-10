@@ -2,18 +2,18 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateTodoInput = {
+export type CreateMessagesInput = {
   id?: string | null,
-  name: string,
-  description?: string | null,
+  message?: string | null,
+  movieID?: string | null,
 };
 
-export type ModelTodoConditionInput = {
-  name?: ModelStringInput | null,
-  description?: ModelStringInput | null,
-  and?: Array< ModelTodoConditionInput | null > | null,
-  or?: Array< ModelTodoConditionInput | null > | null,
-  not?: ModelTodoConditionInput | null,
+export type ModelMessagesConditionInput = {
+  message?: ModelStringInput | null,
+  movieID?: ModelStringInput | null,
+  and?: Array< ModelMessagesConditionInput | null > | null,
+  or?: Array< ModelMessagesConditionInput | null > | null,
+  not?: ModelMessagesConditionInput | null,
 };
 
 export type ModelStringInput = {
@@ -56,32 +56,63 @@ export type ModelSizeInput = {
   between?: Array< number | null > | null,
 };
 
-export type Todo = {
-  __typename: "Todo",
+export type Messages = {
+  __typename: "Messages",
   id: string,
-  name: string,
-  description?: string | null,
+  message?: string | null,
+  movieID?: string | null,
   createdAt: string,
   updatedAt: string,
+  owner?: string | null,
 };
 
-export type UpdateTodoInput = {
+export type UpdateMessagesInput = {
   id: string,
-  name?: string | null,
-  description?: string | null,
+  message?: string | null,
+  movieID?: string | null,
 };
 
-export type DeleteTodoInput = {
+export type DeleteMessagesInput = {
   id: string,
 };
 
-export type ModelTodoFilterInput = {
+export type CreateFavoriteMovieInput = {
+  id?: string | null,
+  movieID: string,
+};
+
+export type ModelFavoriteMovieConditionInput = {
+  movieID?: ModelStringInput | null,
+  and?: Array< ModelFavoriteMovieConditionInput | null > | null,
+  or?: Array< ModelFavoriteMovieConditionInput | null > | null,
+  not?: ModelFavoriteMovieConditionInput | null,
+};
+
+export type FavoriteMovie = {
+  __typename: "FavoriteMovie",
+  id: string,
+  movieID: string,
+  createdAt: string,
+  updatedAt: string,
+  owner?: string | null,
+};
+
+export type UpdateFavoriteMovieInput = {
+  id: string,
+  movieID?: string | null,
+};
+
+export type DeleteFavoriteMovieInput = {
+  id: string,
+};
+
+export type ModelMessagesFilterInput = {
   id?: ModelIDInput | null,
-  name?: ModelStringInput | null,
-  description?: ModelStringInput | null,
-  and?: Array< ModelTodoFilterInput | null > | null,
-  or?: Array< ModelTodoFilterInput | null > | null,
-  not?: ModelTodoFilterInput | null,
+  message?: ModelStringInput | null,
+  movieID?: ModelStringInput | null,
+  and?: Array< ModelMessagesFilterInput | null > | null,
+  or?: Array< ModelMessagesFilterInput | null > | null,
+  not?: ModelMessagesFilterInput | null,
 };
 
 export type ModelIDInput = {
@@ -100,18 +131,32 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null,
 };
 
-export type ModelTodoConnection = {
-  __typename: "ModelTodoConnection",
-  items:  Array<Todo | null >,
+export type ModelMessagesConnection = {
+  __typename: "ModelMessagesConnection",
+  items:  Array<Messages | null >,
   nextToken?: string | null,
 };
 
-export type ModelSubscriptionTodoFilterInput = {
+export type ModelFavoriteMovieFilterInput = {
+  id?: ModelIDInput | null,
+  movieID?: ModelStringInput | null,
+  and?: Array< ModelFavoriteMovieFilterInput | null > | null,
+  or?: Array< ModelFavoriteMovieFilterInput | null > | null,
+  not?: ModelFavoriteMovieFilterInput | null,
+};
+
+export type ModelFavoriteMovieConnection = {
+  __typename: "ModelFavoriteMovieConnection",
+  items:  Array<FavoriteMovie | null >,
+  nextToken?: string | null,
+};
+
+export type ModelSubscriptionMessagesFilterInput = {
   id?: ModelSubscriptionIDInput | null,
-  name?: ModelSubscriptionStringInput | null,
-  description?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionTodoFilterInput | null > | null,
-  or?: Array< ModelSubscriptionTodoFilterInput | null > | null,
+  message?: ModelSubscriptionStringInput | null,
+  movieID?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionMessagesFilterInput | null > | null,
+  or?: Array< ModelSubscriptionMessagesFilterInput | null > | null,
 };
 
 export type ModelSubscriptionIDInput = {
@@ -144,131 +189,281 @@ export type ModelSubscriptionStringInput = {
   notIn?: Array< string | null > | null,
 };
 
-export type CreateTodoMutationVariables = {
-  input: CreateTodoInput,
-  condition?: ModelTodoConditionInput | null,
+export type ModelSubscriptionFavoriteMovieFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  movieID?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionFavoriteMovieFilterInput | null > | null,
+  or?: Array< ModelSubscriptionFavoriteMovieFilterInput | null > | null,
 };
 
-export type CreateTodoMutation = {
-  createTodo?:  {
-    __typename: "Todo",
+export type CreateMessagesMutationVariables = {
+  input: CreateMessagesInput,
+  condition?: ModelMessagesConditionInput | null,
+};
+
+export type CreateMessagesMutation = {
+  createMessages?:  {
+    __typename: "Messages",
     id: string,
-    name: string,
-    description?: string | null,
+    message?: string | null,
+    movieID?: string | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
-export type UpdateTodoMutationVariables = {
-  input: UpdateTodoInput,
-  condition?: ModelTodoConditionInput | null,
+export type UpdateMessagesMutationVariables = {
+  input: UpdateMessagesInput,
+  condition?: ModelMessagesConditionInput | null,
 };
 
-export type UpdateTodoMutation = {
-  updateTodo?:  {
-    __typename: "Todo",
+export type UpdateMessagesMutation = {
+  updateMessages?:  {
+    __typename: "Messages",
     id: string,
-    name: string,
-    description?: string | null,
+    message?: string | null,
+    movieID?: string | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
-export type DeleteTodoMutationVariables = {
-  input: DeleteTodoInput,
-  condition?: ModelTodoConditionInput | null,
+export type DeleteMessagesMutationVariables = {
+  input: DeleteMessagesInput,
+  condition?: ModelMessagesConditionInput | null,
 };
 
-export type DeleteTodoMutation = {
-  deleteTodo?:  {
-    __typename: "Todo",
+export type DeleteMessagesMutation = {
+  deleteMessages?:  {
+    __typename: "Messages",
     id: string,
-    name: string,
-    description?: string | null,
+    message?: string | null,
+    movieID?: string | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
-export type GetTodoQueryVariables = {
+export type CreateFavoriteMovieMutationVariables = {
+  input: CreateFavoriteMovieInput,
+  condition?: ModelFavoriteMovieConditionInput | null,
+};
+
+export type CreateFavoriteMovieMutation = {
+  createFavoriteMovie?:  {
+    __typename: "FavoriteMovie",
+    id: string,
+    movieID: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type UpdateFavoriteMovieMutationVariables = {
+  input: UpdateFavoriteMovieInput,
+  condition?: ModelFavoriteMovieConditionInput | null,
+};
+
+export type UpdateFavoriteMovieMutation = {
+  updateFavoriteMovie?:  {
+    __typename: "FavoriteMovie",
+    id: string,
+    movieID: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type DeleteFavoriteMovieMutationVariables = {
+  input: DeleteFavoriteMovieInput,
+  condition?: ModelFavoriteMovieConditionInput | null,
+};
+
+export type DeleteFavoriteMovieMutation = {
+  deleteFavoriteMovie?:  {
+    __typename: "FavoriteMovie",
+    id: string,
+    movieID: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type GetMessagesQueryVariables = {
   id: string,
 };
 
-export type GetTodoQuery = {
-  getTodo?:  {
-    __typename: "Todo",
+export type GetMessagesQuery = {
+  getMessages?:  {
+    __typename: "Messages",
     id: string,
-    name: string,
-    description?: string | null,
+    message?: string | null,
+    movieID?: string | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
-export type ListTodosQueryVariables = {
-  filter?: ModelTodoFilterInput | null,
+export type ListMessagesQueryVariables = {
+  filter?: ModelMessagesFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ListTodosQuery = {
-  listTodos?:  {
-    __typename: "ModelTodoConnection",
+export type ListMessagesQuery = {
+  listMessages?:  {
+    __typename: "ModelMessagesConnection",
     items:  Array< {
-      __typename: "Todo",
+      __typename: "Messages",
       id: string,
-      name: string,
-      description?: string | null,
+      message?: string | null,
+      movieID?: string | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
 };
 
-export type OnCreateTodoSubscriptionVariables = {
-  filter?: ModelSubscriptionTodoFilterInput | null,
+export type GetFavoriteMovieQueryVariables = {
+  id: string,
 };
 
-export type OnCreateTodoSubscription = {
-  onCreateTodo?:  {
-    __typename: "Todo",
+export type GetFavoriteMovieQuery = {
+  getFavoriteMovie?:  {
+    __typename: "FavoriteMovie",
     id: string,
-    name: string,
-    description?: string | null,
+    movieID: string,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
-export type OnUpdateTodoSubscriptionVariables = {
-  filter?: ModelSubscriptionTodoFilterInput | null,
+export type ListFavoriteMoviesQueryVariables = {
+  filter?: ModelFavoriteMovieFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
-export type OnUpdateTodoSubscription = {
-  onUpdateTodo?:  {
-    __typename: "Todo",
-    id: string,
-    name: string,
-    description?: string | null,
-    createdAt: string,
-    updatedAt: string,
+export type ListFavoriteMoviesQuery = {
+  listFavoriteMovies?:  {
+    __typename: "ModelFavoriteMovieConnection",
+    items:  Array< {
+      __typename: "FavoriteMovie",
+      id: string,
+      movieID: string,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null >,
+    nextToken?: string | null,
   } | null,
 };
 
-export type OnDeleteTodoSubscriptionVariables = {
-  filter?: ModelSubscriptionTodoFilterInput | null,
+export type OnCreateMessagesSubscriptionVariables = {
+  filter?: ModelSubscriptionMessagesFilterInput | null,
+  owner?: string | null,
 };
 
-export type OnDeleteTodoSubscription = {
-  onDeleteTodo?:  {
-    __typename: "Todo",
+export type OnCreateMessagesSubscription = {
+  onCreateMessages?:  {
+    __typename: "Messages",
     id: string,
-    name: string,
-    description?: string | null,
+    message?: string | null,
+    movieID?: string | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnUpdateMessagesSubscriptionVariables = {
+  filter?: ModelSubscriptionMessagesFilterInput | null,
+  owner?: string | null,
+};
+
+export type OnUpdateMessagesSubscription = {
+  onUpdateMessages?:  {
+    __typename: "Messages",
+    id: string,
+    message?: string | null,
+    movieID?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnDeleteMessagesSubscriptionVariables = {
+  filter?: ModelSubscriptionMessagesFilterInput | null,
+  owner?: string | null,
+};
+
+export type OnDeleteMessagesSubscription = {
+  onDeleteMessages?:  {
+    __typename: "Messages",
+    id: string,
+    message?: string | null,
+    movieID?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnCreateFavoriteMovieSubscriptionVariables = {
+  filter?: ModelSubscriptionFavoriteMovieFilterInput | null,
+  owner?: string | null,
+};
+
+export type OnCreateFavoriteMovieSubscription = {
+  onCreateFavoriteMovie?:  {
+    __typename: "FavoriteMovie",
+    id: string,
+    movieID: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnUpdateFavoriteMovieSubscriptionVariables = {
+  filter?: ModelSubscriptionFavoriteMovieFilterInput | null,
+  owner?: string | null,
+};
+
+export type OnUpdateFavoriteMovieSubscription = {
+  onUpdateFavoriteMovie?:  {
+    __typename: "FavoriteMovie",
+    id: string,
+    movieID: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnDeleteFavoriteMovieSubscriptionVariables = {
+  filter?: ModelSubscriptionFavoriteMovieFilterInput | null,
+  owner?: string | null,
+};
+
+export type OnDeleteFavoriteMovieSubscription = {
+  onDeleteFavoriteMovie?:  {
+    __typename: "FavoriteMovie",
+    id: string,
+    movieID: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
   } | null,
 };

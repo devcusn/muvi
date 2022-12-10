@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useSearchParams } from "react-router-dom";
+import { API } from "aws-amplify";
 import {
   Box,
   Grid,
@@ -10,11 +11,13 @@ import {
   IconButton,
   Skeleton,
 } from "@mui/material";
+import { Favorite, Share } from "@mui/icons-material";
+
+import * as mutations from "../../graphql/mutations";
 
 import Layout from "../../layout/Layout";
 import { getById } from "../../services/endpoints";
 import { Movie } from "../../services/types";
-import { Favorite, Share } from "@mui/icons-material";
 
 const DetailPage: React.FunctionComponent = () => {
   const [movie, setMovie] = useState<Movie>();
@@ -22,9 +25,15 @@ const DetailPage: React.FunctionComponent = () => {
   const [favorite, setAddFavorite] = useState(false);
   const movieID = searchParams.get("id");
 
-  const addFavorite = () => {
+  const addFavorite = async () => {
     setAddFavorite(true);
-    console.log(movieID);
+
+    const newFavorite = await API.graphql({
+      query: mutations.createFavoriteMovie,
+      variables: { input: { movieID: movieID } },
+      authMode: "AMAZON_COGNITO_USER_POOLS",
+    });
+    console.log(newFavorite);
   };
 
   const movieService = useCallback(async () => {
@@ -34,6 +43,7 @@ const DetailPage: React.FunctionComponent = () => {
 
   useEffect(() => {
     movieService();
+    setAddFavorite(false);
   }, [movieService, searchParams]);
 
   return (

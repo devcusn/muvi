@@ -1,11 +1,10 @@
-type Messages @model @auth(rules: [{allow: owner}, {allow: private}]) {
+type Messages @model @auth(rules: [{ allow: owner }, { allow: private }]) {
   id: ID!
   message: String
   movieID: String
 }
 
-type FavoriteMovie @model @auth(rules: [{allow: private}, {allow: owner}]) {
+type FavoriteMovie @model @auth(rules: [{ allow: owner }, { allow: private }]) {
   id: ID!
   movieID: String!
 }
- 
