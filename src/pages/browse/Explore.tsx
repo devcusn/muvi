@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { Box } from "@mui/material";
 
 import MovieCard from "../../components/MovieCard/MovieCard";
@@ -16,6 +16,7 @@ const ExplorePage: React.FunctionComponent = () => {
   const [page, setPage] = useState(1);
   const [loader, setloader] = useState(true);
   const [notFound, setNotFound] = useState(false);
+  const navigate = useNavigate();
 
   const searchListService = useCallback(async () => {
     setloader(true);
@@ -62,6 +63,9 @@ const ExplorePage: React.FunctionComponent = () => {
       url={movie.Poster}
       imdbID={movie.imdbID}
       key={movie.imdbID + Math.random()}
+      onClick={() => {
+        navigate(`/detail?id=${movie.imdbID}`);
+      }}
     />
   ));
   return (

@@ -21,6 +21,10 @@ const Search: React.FunctionComponent<SearchProps> = ({
       type='horizontal'
       key={movie.imdbID}
       imdbID={movie.imdbID}
+      onClick={() => {
+        navigate(`/detail?id=${movie.imdbID}`);
+        setActiveSearch(false);
+      }}
     />
   ));
 
@@ -83,7 +87,7 @@ const Search: React.FunctionComponent<SearchProps> = ({
             onClick={() => {
               setActiveSearch(false);
               navigate(`/explore?s=${search ? search : "movie"}`, {
-                replace: false,
+                replace: true,
               });
             }}
           >

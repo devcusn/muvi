@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import Layout from "../../layout/Layout";
 import MovieCard from "../../components/MovieCard/MovieCard";
@@ -11,6 +12,7 @@ import { Movie } from "../../services/types";
 const BrowsePage: React.FunctionComponent = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [series, setSeries] = useState<Movie[]>([]);
+  const navigate = useNavigate();
 
   const moviesServices = async () => {
     try {
@@ -40,6 +42,9 @@ const BrowsePage: React.FunctionComponent = () => {
       url={movie.Poster}
       imdbID={movie.imdbID}
       key={movie.imdbID}
+      onClick={() => {
+        navigate(`/detail?id=${movie.imdbID}`);
+      }}
     />
   ));
 
@@ -49,6 +54,9 @@ const BrowsePage: React.FunctionComponent = () => {
       url={serie.Poster}
       imdbID={serie.imdbID}
       key={serie.imdbID}
+      onClick={() => {
+        navigate(`/detail?id=${serie.imdbID}`);
+      }}
     />
   ));
 

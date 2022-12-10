@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useSearchParams } from "react-router-dom";
 import {
   Box,
@@ -21,13 +21,14 @@ const DetailPage: React.FunctionComponent = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const movieID = searchParams.get("id");
 
-  const movieService = async () => {
+  const movieService = useCallback(async () => {
     const res = await getById(movieID);
     setMovie(res.data);
-  };
+  }, [movieID]);
+
   useEffect(() => {
     movieService();
-  }, []);
+  }, [movieService, searchParams]);
 
   return (
     <Layout>
