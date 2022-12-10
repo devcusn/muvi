@@ -30,6 +30,15 @@ export const getRandom = async (seriesName:string) => {
             return response
         })
 }
+export const getById = async (id:string |null) => {
+    return axios({
+            method: 'get',
+            url: `${api}`,
+            params: {i:id,plot:'full'}
+        }).then(function (response) {
+            return response
+        })
+}
 
 export const searchGeneral = async(title:string)=>{
     return axios({
