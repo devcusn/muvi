@@ -34,7 +34,7 @@ const MovieCard: React.FunctionComponent<MovieCardProps> = ({
         )}
       </CardImg>
       <CardTitle>
-        <Typography sx={{ fontSize: "20px" }}>{title.slice(0, 40)}</Typography>
+        <Typography sx={{ fontSize: "20px" }}>{title}</Typography>
       </CardTitle>
     </Card>
   );

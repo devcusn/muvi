@@ -11,6 +11,7 @@ export const getMovies = async (movieName:string) => {
             return response
         })
 }
+
 export const getSeries = async (seriesName:string) => {
     return axios({
             method: 'get',
@@ -40,11 +41,11 @@ export const getById = async (id:string |null) => {
         })
 }
 
-export const searchGeneral = async(title:string)=>{
+export const searchGeneral = async(title:string | null,page:number=1)=>{
     return axios({
         method: 'get',
         url: `${api}`,
-        params: {s:title}
+        params: {s:title,page:page}
     }).then(function (response) {
         return response
     })

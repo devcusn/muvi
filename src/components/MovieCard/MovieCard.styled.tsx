@@ -2,6 +2,7 @@ import { styled } from "@mui/material";
 
 export const Card = styled("div")(
   (props: { type: "horizontal" | "vertical" }) => ({
+    maxWidth: "fit-content",
     display: props.type === "vertical" ? "block" : "flex",
     height: props.type === "vertical" ? "fit-content" : "200px",
     backgroundColor: "#181818",

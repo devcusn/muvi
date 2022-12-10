@@ -205,11 +205,28 @@ const TopBar: React.FunctionComponent = () => {
                   display: "flex",
                   alignItems: "center",
                 }}
-                onClick={() => navigate(`/explore?s=${search}`)}
+                onClick={() => {
+                  setActiveSearch(false);
+                  navigate(`/explore?s=${search ? search : "movie"}`, {
+                    replace: false,
+                  });
+                }}
               >
                 Show More Results
               </Button>
             )}
+
+            <Button
+              sx={{
+                color: "red",
+                fontSize: "25px",
+                display: "flex",
+                alignItems: "center",
+              }}
+              onClick={() => setActiveSearch(false)}
+            >
+              Cancel
+            </Button>
           </Box>
         </Box>
       )}
