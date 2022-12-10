@@ -6,7 +6,7 @@ import MovieCard from "../../components/MovieCard/MovieCard";
 import Notice from "../../components/Notice/NoticeText";
 import Layout from "../../layout/Layout";
 
-import { searchGeneral } from "../../services/endpoints";
+import { searchGeneral } from "../../services/movies/endpoints";
 import { Movie } from "../../services/types";
 
 const ExplorePage: React.FunctionComponent = () => {

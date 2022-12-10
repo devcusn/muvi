@@ -6,7 +6,7 @@ import MovieCard from "../../components/MovieCard/MovieCard";
 import Title from "../../components/Title/Title";
 import ScrollList from "../../components/ScrollList/ScrollList";
 
-import { getMovies, getSeries } from "../../services/endpoints";
+import { getMovies, getSeries } from "../../services/movies/endpoints";
 import { Movie } from "../../services/types";
 
 const BrowsePage: React.FunctionComponent = () => {

@@ -16,7 +16,7 @@ import Search from "../Search/Search";
 import { Movie } from "../../services/types";
 import { TopBarProps } from "./types";
 
-import { searchGeneral } from "../../services/endpoints";
+import { searchGeneral } from "../../services/movies/endpoints";
 
 const TopBar: React.FunctionComponent<TopBarProps> = ({ pageType }) => {
   const inputRef = useRef<HTMLDivElement>(null);

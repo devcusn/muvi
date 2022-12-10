@@ -6,7 +6,7 @@ import { Box } from "@mui/material";
 import Layout from "../../layout/Layout";
 
 import * as queries from "../../graphql/queries";
-import { getById } from "../../services/endpoints";
+import { getById } from "../../services/movies/endpoints";
 import { Movie } from "../../services/types";
 import MovieCard from "../../components/MovieCard/MovieCard";
 import Notice from "../../components/Notice/NoticeText";

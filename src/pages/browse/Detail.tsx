@@ -16,7 +16,7 @@ import { Favorite, Share } from "@mui/icons-material";
 import * as mutations from "../../graphql/mutations";
 
 import Layout from "../../layout/Layout";
-import { getById } from "../../services/endpoints";
+import { getById } from "../../services/movies/endpoints";
 import { Movie } from "../../services/types";
 
 const DetailPage: React.FunctionComponent = () => {

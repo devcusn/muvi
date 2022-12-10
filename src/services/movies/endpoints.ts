@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import {api} from './api'
+import {api} from '../api'
 
 export const getMovies = async (movieName:string) => {
     return axios({
