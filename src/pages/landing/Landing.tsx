@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, Grid, Typography, Button, styled } from "@mui/material";
 
-import image from "../../assets/img/background.webp";
+import image from "../../assets/img/background.png";
 import Layout from "../../layout/Layout";
 
 const Background = styled("div")({
