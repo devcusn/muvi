@@ -5,19 +5,20 @@ import {
   Box,
   Grid,
   TextField,
-  Button,
   IconButton,
   Autocomplete,
+  Button,
 } from "@mui/material";
 import { ExitToApp } from "@mui/icons-material";
 import { Auth } from "aws-amplify";
 
-import MovieCard from "../MovieCard/MovieCard";
+import Search from "../Search/Search";
+import { Movie } from "../../services/types";
+import { TopBarProps } from "./types";
 
 import { searchGeneral } from "../../services/endpoints";
-import { Movie } from "../../services/types";
 
-const TopBar: React.FunctionComponent = () => {
+const TopBar: React.FunctionComponent<TopBarProps> = ({ pageType }) => {
   const inputRef = useRef<HTMLDivElement>(null);
   const [searchResult, setSearchResult] = useState<Movie[]>([]);
   const [activeSearch, setActiveSearch] = useState(false);
@@ -70,16 +71,6 @@ const TopBar: React.FunctionComponent = () => {
     searchGeneralServices("movie");
   };
 
-  const movieCards = searchResult?.map((movie) => (
-    <MovieCard
-      title={movie.Title}
-      url={movie.Poster}
-      type='horizontal'
-      key={movie.imdbID}
-      imdbID={movie.imdbID}
-    />
-  ));
-
   return (
     <>
       <Grid
@@ -112,27 +103,30 @@ const TopBar: React.FunctionComponent = () => {
             Lay Back And Watch
           </Typography>
         </Box>
-        <Box sx={{ flex: 3 }}>
-          <Autocomplete
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                placeholder='Search Movies or Series'
-                color='secondary'
-                sx={{ width: "100%" }}
-                onChange={handleSearch}
-                onClick={initSearch}
-                ref={inputRef}
-              />
-            )}
-            ref={inputRef}
-            options={
-              searchResult
-                ? searchResult?.map((opt) => opt.Title).slice(0, 2)
-                : []
-            }
-          />
-        </Box>
+        {pageType !== "landing" && (
+          <Box sx={{ flex: 3 }}>
+            <Autocomplete
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  placeholder='Search Movies or Series'
+                  color='secondary'
+                  sx={{ width: "100%" }}
+                  onChange={handleSearch}
+                  onClick={initSearch}
+                  ref={inputRef}
+                />
+              )}
+              ref={inputRef}
+              options={
+                searchResult
+                  ? searchResult?.map((opt) => opt.Title).slice(0, 2)
+                  : []
+              }
+            />
+          </Box>
+        )}
+
         <Box
           sx={{
             display: "flex",
@@ -140,95 +134,32 @@ const TopBar: React.FunctionComponent = () => {
             justifyContent: "flex-end",
           }}
         >
-          <IconButton
-            onClick={() => {
-              exit();
-            }}
-          >
-            <ExitToApp fontSize='large' color='error' />
-          </IconButton>
+          {pageType !== "landing" ? (
+            <IconButton
+              onClick={() => {
+                exit();
+              }}
+            >
+              <ExitToApp fontSize='large' color='error' />
+            </IconButton>
+          ) : (
+            <Button
+              sx={{ color: "red" }}
+              onClick={() => navigate("/membership")}
+            >
+              Login
+            </Button>
+          )}
         </Box>
       </Grid>
       {activeSearch && (
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            position: "fixed",
-            top: "100px",
-            width: "100%",
-            height: "100vh",
-            zIndex: 10,
-            backgroundColor: "black",
-          }}
-        >
-          <Box
-            sx={{
-              flexWrap: "wrap",
-              width: "100%",
-              display: "flex",
-              gap: "20px",
-              padding: "20px",
-              height: "min-content",
-            }}
-          >
-            {movieCards?.length && !loading ? (
-              movieCards
-            ) : !notFound ? (
-              <Box
-                sx={{
-                  color: "red",
-                  fontSize: "20px",
-                  width: "100%",
-                  textAlign: "center",
-                }}
-              >
-                There is no result
-              </Box>
-            ) : (
-              <Box
-                sx={{
-                  color: "red",
-                  fontSize: "20px",
-                  width: "100%",
-                  textAlign: "center",
-                }}
-              >
-                Loading
-              </Box>
-            )}
-            {movieCards && (
-              <Button
-                sx={{
-                  color: "red",
-                  fontSize: "25px",
-                  display: "flex",
-                  alignItems: "center",
-                }}
-                onClick={() => {
-                  setActiveSearch(false);
-                  navigate(`/explore?s=${search ? search : "movie"}`, {
-                    replace: false,
-                  });
-                }}
-              >
-                Show More Results
-              </Button>
-            )}
-
-            <Button
-              sx={{
-                color: "red",
-                fontSize: "25px",
-                display: "flex",
-                alignItems: "center",
-              }}
-              onClick={() => setActiveSearch(false)}
-            >
-              Cancel
-            </Button>
-          </Box>
-        </Box>
+        <Search
+          movies={searchResult}
+          loading={loading}
+          notFound={notFound}
+          search={search}
+          setActiveSearch={setActiveSearch}
+        />
       )}
     </>
   );

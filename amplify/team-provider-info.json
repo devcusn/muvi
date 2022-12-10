@@ -20,6 +20,9 @@
           "appId": "d1k1o8vw5h0khr",
           "type": "manual"
         }
+      },
+      "api": {
+        "muviapp": {}
       }
     }
   }

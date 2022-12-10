@@ -3,11 +3,11 @@ import { useLocation, useSearchParams } from "react-router-dom";
 import { Box } from "@mui/material";
 
 import MovieCard from "../../components/MovieCard/MovieCard";
+import Notice from "../../components/Notice/NoticeText";
 import Layout from "../../layout/Layout";
 
 import { searchGeneral } from "../../services/endpoints";
 import { Movie } from "../../services/types";
-import { cssNameTransform } from "@aws-amplify/ui";
 
 const ExplorePage: React.FunctionComponent = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -76,30 +76,8 @@ const ExplorePage: React.FunctionComponent = () => {
       >
         {movieCards}
       </Box>
-      {loader && (
-        <Box
-          sx={{
-            color: "red",
-            fontSize: "30px",
-            textAlign: "center",
-            padding: "40px",
-          }}
-        >
-          Loding
-        </Box>
-      )}
-      {!notFound && !loader && (
-        <Box
-          sx={{
-            color: "red",
-            fontSize: "30px",
-            textAlign: "center",
-            padding: "40px",
-          }}
-        >
-          Not Found
-        </Box>
-      )}
+      {loader && <Notice text='Loading' />}
+      {!notFound && !loader && <Notice text='Not Found' />}
     </Layout>
   );
 };

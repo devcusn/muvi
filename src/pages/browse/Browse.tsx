@@ -42,6 +42,7 @@ const BrowsePage: React.FunctionComponent = () => {
       key={movie.imdbID}
     />
   ));
+
   const Series = series.map((serie) => (
     <MovieCard
       title={serie.Title}
