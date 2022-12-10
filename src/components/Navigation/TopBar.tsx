@@ -15,12 +15,13 @@ const TopBar: React.FunctionComponent = () => {
       console.log("error signing out: ", error);
     }
   };
+
   return (
     <Grid
       container
       direction='row'
       alignItems='center'
-      sx={{ position: "fixed", padding: "20px", backgroundColor: "#000000" }}
+      sx={{ position: "fixed", padding: "20px", backgroundColor: "#131212" }}
     >
       <Box>
         <Typography

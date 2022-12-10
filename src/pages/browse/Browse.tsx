@@ -6,6 +6,7 @@ import Layout from "../../layout/Layout";
 import MovieCard from "../../components/MovieCard/MovieCard";
 import { Movie } from "../../services/types";
 import Title from "../../components/Title/Title";
+import ScrollList from "../../components/ScrollList/ScrollList";
 
 const BrowsePage: React.FunctionComponent = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -51,23 +52,9 @@ const BrowsePage: React.FunctionComponent = () => {
   return (
     <Layout>
       <Title title='Movies' subtitle='Recommended for you' />
-      <Grid
-        container
-        justifyContent='space-around'
-        gap='30px'
-        padding='0px 20px'
-      >
-        {Movies}
-      </Grid>
+      <ScrollList>{Movies}</ScrollList>
       <Title title='Series' subtitle='Recommended for you' />
-      <Grid
-        container
-        justifyContent='space-around'
-        gap='30px'
-        padding='0px 20px'
-      >
-        {Series}
-      </Grid>
+      <ScrollList>{Series}</ScrollList>
     </Layout>
   );
 };
