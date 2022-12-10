@@ -9,7 +9,7 @@ import {
   Autocomplete,
   Button,
 } from "@mui/material";
-import { ExitToApp } from "@mui/icons-material";
+import { ExitToApp, Favorite } from "@mui/icons-material";
 import { Auth } from "aws-amplify";
 
 import Search from "../Search/Search";
@@ -135,13 +135,24 @@ const TopBar: React.FunctionComponent<TopBarProps> = ({ pageType }) => {
           }}
         >
           {pageType !== "landing" ? (
-            <IconButton
-              onClick={() => {
-                exit();
-              }}
-            >
-              <ExitToApp fontSize='large' color='error' />
-            </IconButton>
+            <>
+              <Button
+                sx={{ fontSize: "15px", color: "red" }}
+                startIcon={<Favorite />}
+                onClick={() => {
+                  navigate("/favorites");
+                }}
+              >
+                Favorites
+              </Button>
+              <IconButton
+                onClick={() => {
+                  exit();
+                }}
+              >
+                <ExitToApp fontSize='large' color='error' />
+              </IconButton>
+            </>
           ) : (
             <Button
               sx={{ color: "red" }}
