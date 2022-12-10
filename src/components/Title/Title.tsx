@@ -7,7 +7,7 @@ const Title: React.FunctionComponent<TitleProps> = ({ title, subtitle }) => {
   return (
     <Box
       sx={{
-        padding: "10px 50px 20px 42px",
+        padding: "20px 50px 20px 50px",
         display: "flex",
         alignItems: "center",
       }}
