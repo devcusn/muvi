@@ -5,17 +5,17 @@ import {
   Box,
   Grid,
   Typography,
-  Avatar,
   TextField,
   Button,
   IconButton,
-  Skeleton,
 } from "@mui/material";
 import { Favorite, Share } from "@mui/icons-material";
 
-import * as mutations from "../../graphql/mutations";
-
 import Layout from "../../layout/Layout";
+import * as mutations from "../../graphql/mutations";
+import SkeletonMovieDetail from "../../components/Skeleton/Skeleton";
+import Message from "../../components/Message/Message";
+
 import { getById } from "../../services/movies/endpoints";
 import { Movie } from "../../services/types";
 
@@ -95,20 +95,7 @@ const DetailPage: React.FunctionComponent = () => {
             </Box>
           </Box>
         )}
-        {!movie && (
-          <Box sx={{ display: "flex" }}>
-            <Skeleton variant='rectangular' width={210} height={400} />
-            <Box sx={{ padding: "0px 20px" }}>
-              <Skeleton variant='rectangular' width={400} height={60} />
-              <Skeleton
-                variant='rounded'
-                width={400}
-                height={330}
-                sx={{ marginTop: "10px" }}
-              />
-            </Box>
-          </Box>
-        )}
+        {!movie && <SkeletonMovieDetail />}
         <Box sx={{ width: "100%", maxWidth: "800px", marginTop: "20px" }}>
           <TextField
             sx={{ width: "100%" }}
@@ -117,18 +104,7 @@ const DetailPage: React.FunctionComponent = () => {
             variant='standard'
           />
         </Box>
-        <Box sx={{ width: "100%", maxWidth: "800px", marginTop: "20px" }}>
-          <Box
-            sx={{
-              backgroundColor: "#202020",
-              padding: "10px",
-              borderRadius: "8px",
-              marginTop: "4px",
-            }}
-          >
-            <Avatar>U</Avatar>
-          </Box>
-        </Box>
+        <Message message='elgölafgmkalf' />
       </Grid>
     </Layout>
   );
