@@ -137,13 +137,21 @@ const TopBar: React.FunctionComponent<TopBarProps> = ({ pageType }) => {
           {pageType !== "landing" ? (
             <>
               <Button
-                sx={{ fontSize: "15px", color: "red" }}
+                sx={{ fontSize: "12px", color: "red" }}
                 startIcon={<Favorite />}
                 onClick={() => {
                   navigate("/favorites");
                 }}
               >
                 Favorites
+              </Button>
+              <Button
+                sx={{ fontSize: "12px", color: "red" }}
+                onClick={() => {
+                  navigate("/comments");
+                }}
+              >
+                Comments
               </Button>
               <IconButton
                 onClick={() => {

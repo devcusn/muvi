@@ -4,6 +4,7 @@ import MembershipPage from "../../pages/membership/Membership";
 import DetailPage from "../../pages/browse/Detail";
 import ExplorePage from "../../pages/browse/Explore";
 import FavoritePage from "../../pages/favorites/Favorites";
+import CommentPage from "../../pages/comments/Comments";
 
 import { RouteType } from "./types";
 
@@ -14,6 +15,7 @@ const RouterList: RouteType[] = [
   {  Page: DetailPage, path: "/detail", pageType: "protected" },
   {  Page: ExplorePage, path: "/explore", pageType: "protected" },
   {  Page: FavoritePage, path: "/favorites", pageType: "protected" },
+  {  Page: CommentPage, path: "/comments", pageType: "protected" },
 ];
 
 export default RouterList;
