@@ -18,7 +18,11 @@ Movie Application - React.js, Typescript, Material-UI , AWS Amplify, The Movie D
 
 #### API Source
 
-- Omdb API -> (http://omdbapi.com/)
+- Omdb API -> http://omdbapi.com/
+
+### Mail Service
+
+- SendGrid -> https://sendgrid.com/
 
 #### Host
 
