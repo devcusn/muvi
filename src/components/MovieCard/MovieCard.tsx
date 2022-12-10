@@ -1,33 +1,42 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, Typography } from "@mui/material";
+import { Typography, Box } from "@mui/material";
 
 import { MovieCardProps } from "./types";
+import { Card, CardImg, Img, CardTitle } from "./MovieCard.styled";
+import { ImageNotSupported } from "@mui/icons-material";
 
 const MovieCard: React.FunctionComponent<MovieCardProps> = ({
   title,
   url,
   imdbID,
+  type = "vertical",
 }) => {
   const navigate = useNavigate();
+
   return (
-    <Box
-      sx={{ width: "300px", backgroundColor: "#181818", cursor: "pointer" }}
-      onClick={() => {
-        navigate(`/detail?id=${imdbID}`);
-      }}
-    >
-      <Box>
-        <img
-          src={url}
-          alt='movie film'
-          style={{ width: "300px", height: "400px", objectFit: "cover" }}
-        />
-      </Box>
-      <Box sx={{ textAlign: "center", padding: "20px", hegiht: "100px" }}>
+    <Card onClick={() => navigate(`/detail?id=${imdbID}`)} type={type}>
+      <CardImg>
+        {url !== "N/A" ? (
+          <Img src={url} alt='movie film' />
+        ) : (
+          <Box
+            sx={{
+              width: "100px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100%",
+            }}
+          >
+            <ImageNotSupported sx={{ color: "red", fontSize: "40px" }} />
+          </Box>
+        )}
+      </CardImg>
+      <CardTitle>
         <Typography sx={{ fontSize: "20px" }}>{title.slice(0, 40)}</Typography>
-      </Box>
-    </Box>
+      </CardTitle>
+    </Card>
   );
 };
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Box, Grid, Typography } from "@mui/material";
 
-import { getMovies, getRandom, getSeries } from "../../services/movies";
+import { getMovies, getRandom, getSeries } from "../../services/endpoints";
 import Layout from "../../layout/Layout";
 import MovieCard from "../../components/MovieCard/MovieCard";
 import { Movie } from "../../services/types";

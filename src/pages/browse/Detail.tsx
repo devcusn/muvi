@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 
 import Layout from "../../layout/Layout";
-import { getById } from "../../services/movies";
+import { getById } from "../../services/endpoints";
 import { Movie } from "../../services/types";
 import { Favorite, Share } from "@mui/icons-material";
 
