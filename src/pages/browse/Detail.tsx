@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
 import { API } from "aws-amplify";
 import {
@@ -14,21 +14,24 @@ import { Favorite, Share } from "@mui/icons-material";
 import Layout from "../../layout/Layout";
 import * as mutations from "../../graphql/mutations";
 import SkeletonMovieDetail from "../../components/Skeleton/Skeleton";
-import Message from "../../components/Message/Message";
+import Comment from "../../components/Comment/Comment";
 
 import { getById } from "../../services/movies/endpoints";
 import { Movie } from "../../services/types";
 
 const DetailPage: React.FunctionComponent = () => {
   const [movie, setMovie] = useState<Movie>();
-  const [searchParams, setSearchParams] = useSearchParams();
   const [favorite, setAddFavorite] = useState(false);
+  const [messages, setMessages] = useState<string[]>([]);
+  const [message, setMessage] = useState("");
+  const messageComponent = useRef(null);
+  const [searchParams, setSearchParams] = useSearchParams();
   const movieID = searchParams.get("id");
 
   const addFavorite = async () => {
     setAddFavorite(true);
     try {
-      const newFavorite = await API.graphql({
+      await API.graphql({
         query: mutations.createFavoriteMovie,
         variables: { input: { movieID: movieID } },
         authMode: "AMAZON_COGNITO_USER_POOLS",
@@ -37,12 +40,38 @@ const DetailPage: React.FunctionComponent = () => {
       console.log(err);
     }
   };
-
+  const addComment = async () => {
+    try {
+      await API.graphql({
+        query: mutations.createMessages,
+        variables: { input: { movieID: movieID, message: message } },
+        authMode: "AMAZON_COGNITO_USER_POOLS",
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
   const movieService = useCallback(async () => {
     const res = await getById(movieID);
     setMovie(res.data);
   }, [movieID]);
 
+  const addMessage = (event: React.KeyboardEvent) => {
+    const key = event.key;
+    const text = (messageComponent.current as any).children[1].children[0]
+      .value;
+    setMessage(text);
+    if (key === "Enter") {
+      addComment();
+      setMessage("");
+      (messageComponent.current as any).children[1].children[0].value = "";
+      setMessages((prev) => [...prev, message]);
+    }
+  };
+
+  const messagesComponents = messages.map((m, index) => (
+    <Comment message={m} key={index} />
+  ));
   useEffect(() => {
     movieService();
     setAddFavorite(false);
@@ -102,9 +131,11 @@ const DetailPage: React.FunctionComponent = () => {
             label='Add Your Comment'
             color='secondary'
             variant='standard'
+            onKeyUp={addMessage}
+            ref={messageComponent}
           />
         </Box>
-        <Message message='elgölafgmkalf' />
+        {messagesComponents}
       </Grid>
     </Layout>
   );

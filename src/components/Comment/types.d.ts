@@ -1,3 +1,3 @@
-export type MessagesProps = {
+export type CommentProps = {
     message:string | undefined
 }

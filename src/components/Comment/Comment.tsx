@@ -1,9 +1,9 @@
 import React from "react";
 import { Box, Avatar } from "@mui/material";
 
-import { MessagesProps } from "./types";
+import { CommentProps } from "./types";
 
-const Message: React.FunctionComponent<MessagesProps> = ({ message }) => {
+const Comment: React.FunctionComponent<CommentProps> = ({ message }) => {
   return (
     <Box sx={{ width: "100%", maxWidth: "800px", marginTop: "20px" }}>
       <Box
@@ -17,10 +17,10 @@ const Message: React.FunctionComponent<MessagesProps> = ({ message }) => {
         }}
       >
         <Avatar>U</Avatar>
-        <Box sx={{ marginLeft: "10px" }}>as asdlas dmasasdasd dad lads</Box>
+        <Box sx={{ marginLeft: "10px" }}>{message}</Box>
       </Box>
     </Box>
   );
 };
 
-export default Message;
+export default Comment;
