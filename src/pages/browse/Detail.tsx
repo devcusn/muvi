@@ -19,7 +19,13 @@ import { Favorite, Share } from "@mui/icons-material";
 const DetailPage: React.FunctionComponent = () => {
   const [movie, setMovie] = useState<Movie>();
   const [searchParams, setSearchParams] = useSearchParams();
+  const [favorite, setAddFavorite] = useState(false);
   const movieID = searchParams.get("id");
+
+  const addFavorite = () => {
+    setAddFavorite(true);
+    console.log(movieID);
+  };
 
   const movieService = useCallback(async () => {
     const res = await getById(movieID);
@@ -66,7 +72,13 @@ const DetailPage: React.FunctionComponent = () => {
                 <IconButton color='info'>
                   <Share />
                 </IconButton>
-                <Button startIcon={<Favorite />}>Add Favorite</Button>
+                <Button
+                  onClick={addFavorite}
+                  startIcon={<Favorite />}
+                  sx={{ color: favorite ? "#35c922" : "red" }}
+                >
+                  {favorite ? "Added" : "Add Favorite"}
+                </Button>
               </Box>
             </Box>
           </Box>
