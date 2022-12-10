@@ -23,7 +23,6 @@ const DetailPage: React.FunctionComponent = () => {
 
   const movieService = async () => {
     const res = await getById(movieID);
-    console.log(res);
     setMovie(res.data);
   };
   useEffect(() => {

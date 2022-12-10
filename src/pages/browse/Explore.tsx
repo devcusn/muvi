@@ -7,6 +7,7 @@ import Layout from "../../layout/Layout";
 
 import { searchGeneral } from "../../services/endpoints";
 import { Movie } from "../../services/types";
+import { cssNameTransform } from "@aws-amplify/ui";
 
 const ExplorePage: React.FunctionComponent = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -14,6 +15,7 @@ const ExplorePage: React.FunctionComponent = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [page, setPage] = useState(1);
   const [loader, setloader] = useState(true);
+  const [notFound, setNotFound] = useState(false);
 
   const searchListService = useCallback(async () => {
     setloader(true);
@@ -25,7 +27,7 @@ const ExplorePage: React.FunctionComponent = () => {
         setMovies((prev) => [...prev, ...res.data.Search]);
       }
     } else {
-      setMovies([]);
+      setNotFound(true);
     }
     setloader(false);
   }, [page, searchParams]);
@@ -34,9 +36,10 @@ const ExplorePage: React.FunctionComponent = () => {
     const height = document.documentElement.scrollHeight;
     const top = document.documentElement.scrollTop;
     const innerHeight = window.innerHeight;
-
-    if (innerHeight + top + 1 > height) {
-      setPage((prev) => prev + 1);
+    if (!notFound) {
+      if (innerHeight + top === height) {
+        setPage((prev) => prev + 1);
+      }
     }
   };
 
@@ -61,7 +64,6 @@ const ExplorePage: React.FunctionComponent = () => {
       key={movie.imdbID + Math.random()}
     />
   ));
-  console.log("work");
   return (
     <Layout>
       <Box
@@ -84,6 +86,18 @@ const ExplorePage: React.FunctionComponent = () => {
           }}
         >
           Loding
+        </Box>
+      )}
+      {!notFound && !loader && (
+        <Box
+          sx={{
+            color: "red",
+            fontSize: "30px",
+            textAlign: "center",
+            padding: "40px",
+          }}
+        >
+          Not Found
         </Box>
       )}
     </Layout>
