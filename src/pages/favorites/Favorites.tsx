@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { API, Auth } from "aws-amplify";
-import { Box } from "@mui/material";
+import { Box, useMediaQuery } from "@mui/material";
 
 import Layout from "../../layout/Layout";
 
@@ -15,10 +15,9 @@ const FavoritesPage: React.FunctionComponent = () => {
   const [favorites, setFavorites] = useState([]);
   const [movies, setMovies] = useState<Movie[]>([]);
   const navigate = useNavigate();
-
+  const matches = useMediaQuery("(min-width:700px)", { noSsr: true });
   const getFavorites = async () => {
     const userId = (await Auth.currentAuthenticatedUser()).username;
-
     try {
       const favorites = await API.graphql({
         query: queries.listFavoriteMovies,
@@ -65,13 +64,15 @@ const FavoritesPage: React.FunctionComponent = () => {
       <Box
         sx={{
           display: "flex",
+          flexDirection: matches ? "row" : "column",
           justifyContent: "space-around",
+          alignItems: matches ? "initial" : "center",
           gap: "30px",
           flexWrap: "wrap",
           padding: "20px",
         }}
       >
-        {favoriteMovies ? (
+        {favorites ? (
           favoriteMovies
         ) : (
           <Notice text="you don't have any favorite movies" />

@@ -1,14 +1,15 @@
 import React from "react";
-import { Box } from "@mui/material";
+import { Box, useMediaQuery } from "@mui/material";
 
 import { NoticeProps } from "./types";
 
 const Notice: React.FunctionComponent<NoticeProps> = ({ text }) => {
+  const matches = useMediaQuery("(min-width:700px)", { noSsr: true });
   return (
     <Box
       sx={{
         color: "red",
-        fontSize: "30px",
+        fontSize: matches ? "30px" : "15px",
         textAlign: "center",
         padding: "40px",
       }}

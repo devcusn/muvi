@@ -5,6 +5,7 @@ import Layout from "../../layout/Layout";
 import MovieCard from "../../components/MovieCard/MovieCard";
 import Title from "../../components/Title/Title";
 import ScrollList from "../../components/ScrollList/ScrollList";
+import SkeletonCard from "../../components/Skeleton/SkeletonCard";
 
 import { getMovies, getSeries } from "../../services/movies/endpoints";
 import { Movie } from "../../services/types";
@@ -12,6 +13,8 @@ import { Movie } from "../../services/types";
 const BrowsePage: React.FunctionComponent = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [series, setSeries] = useState<Movie[]>([]);
+  const [loader, setLoader] = useState(true);
+
   const navigate = useNavigate();
 
   const moviesServices = async () => {
@@ -21,6 +24,7 @@ const BrowsePage: React.FunctionComponent = () => {
     } catch (err) {
       console.log(err);
     }
+    setLoader(false);
   };
   const seriesServices = async () => {
     try {
@@ -29,6 +33,7 @@ const BrowsePage: React.FunctionComponent = () => {
     } catch (err) {
       console.log(err);
     }
+    setLoader(false);
   };
 
   useEffect(() => {
@@ -63,9 +68,9 @@ const BrowsePage: React.FunctionComponent = () => {
   return (
     <Layout>
       <Title title='Movies' subtitle='Recommended for you' />
-      <ScrollList>{Movies}</ScrollList>
+      <ScrollList>{loader ? <SkeletonCard /> : Movies}</ScrollList>
       <Title title='Series' subtitle='Recommended for you' />
-      <ScrollList>{Series}</ScrollList>
+      <ScrollList>{loader ? <SkeletonCard /> : Series}</ScrollList>
     </Layout>
   );
 };
