@@ -186,7 +186,7 @@ const TopBar: React.FunctionComponent<TopBarProps> = ({ pageType }) => {
         </Box>
         <Box>
           {pageType !== "landing" && !matches && (
-            <Box sx={{ width: "370px" }}>
+            <Box sx={{ width: "350px" }}>
               <Autocomplete
                 renderInput={(params) => (
                   <TextField

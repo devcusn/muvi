@@ -98,7 +98,7 @@ const DetailPage: React.FunctionComponent = () => {
               sx={{
                 marginTop: !matches ? "20px" : "0px",
                 padding: "0px 20px",
-                width: "500px",
+                width: !matches ? "100%" : "500px",
                 display: "flex",
                 flexDirection: "column",
               }}

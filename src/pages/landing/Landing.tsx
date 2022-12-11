@@ -12,6 +12,7 @@ import {
 import image from "../../assets/img/background.png";
 import Layout from "../../layout/Layout";
 import AuthContext from "../../context/AuthContext";
+
 const Background = styled("div")({
   backgroundImage: `url(${image})`,
   minHeight: "100vh",
@@ -21,7 +22,6 @@ const LandingPage: React.FunctionComponent = () => {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
   const matches = useMediaQuery("(min-width:800px)", { noSsr: true });
-  console.log(auth);
 
   useEffect(() => {
     if (auth) {
