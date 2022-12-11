@@ -21,24 +21,27 @@ const BrowsePage: React.FunctionComponent = () => {
     try {
       const res = await getMovies("random");
       setMovies(res.data.Search);
+      setLoader(false);
     } catch (err) {
       console.log(err);
     }
-    setLoader(false);
   };
+
   const seriesServices = async () => {
     try {
       const res = await getSeries("random");
       setSeries(res.data.Search);
+      setLoader(false);
     } catch (err) {
       console.log(err);
     }
-    setLoader(false);
   };
 
   useEffect(() => {
-    moviesServices();
-    seriesServices();
+    setTimeout(() => {
+      moviesServices();
+      seriesServices();
+    }, 500);
   }, []);
 
   const Movies = movies.map((movie) => (
@@ -68,9 +71,9 @@ const BrowsePage: React.FunctionComponent = () => {
   return (
     <Layout>
       <Title title='Movies' subtitle='Recommended for you' />
-      <ScrollList>{loader ? <SkeletonCard /> : Movies}</ScrollList>
+      <ScrollList>{loader ? <SkeletonCard amount={10} /> : Movies}</ScrollList>
       <Title title='Series' subtitle='Recommended for you' />
-      <ScrollList>{loader ? <SkeletonCard /> : Series}</ScrollList>
+      <ScrollList>{loader ? <SkeletonCard amount={10} /> : Series}</ScrollList>
     </Layout>
   );
 };
