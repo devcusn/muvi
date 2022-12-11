@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Box,
@@ -11,15 +11,23 @@ import {
 
 import image from "../../assets/img/background.png";
 import Layout from "../../layout/Layout";
-
+import AuthContext from "../../context/AuthContext";
 const Background = styled("div")({
   backgroundImage: `url(${image})`,
   minHeight: "100vh",
 });
 
 const LandingPage: React.FunctionComponent = () => {
+  const auth = useContext(AuthContext);
   const navigate = useNavigate();
   const matches = useMediaQuery("(min-width:800px)", { noSsr: true });
+  console.log(auth);
+
+  useEffect(() => {
+    if (auth) {
+      navigate("/membership");
+    }
+  }, [navigate, auth]);
 
   return (
     <Layout pageType='landing'>

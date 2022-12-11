@@ -9,6 +9,7 @@ const Layout: React.FunctionComponent<LayoutProps> = ({
   pageType = "inside",
 }) => {
   const matches = useMediaQuery("(min-width:700px)", { noSsr: true });
+
   return (
     <Box sx={{ paddingBottom: "60px" }}>
       <TopBar pageType={pageType} />

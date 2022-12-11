@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { Hub } from "aws-amplify";
+import React, { useEffect, useState, useContext } from "react";
+import { Auth } from "aws-amplify";
+
+import AuthContext from "../context/AuthContext";
+
 const Guard: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isAuth, setIsAuth] = useState<boolean>(false);
 
-  const listenToAutoSignInEvent = () => {
-    Hub.listen("auth", ({ payload }) => {
-      const { event } = payload;
-      if (event === "autoSignIn") {
-        setIsAuth(true);
-      } else if (event === "autoSignIn_failure") {
-        setIsAuth(false);
-      }
-    });
+  const listenToAutoSignInEvent = async () => {
+    try {
+      await Auth.currentAuthenticatedUser();
+      setIsAuth(true);
+    } catch (err) {
+      setIsAuth(false);
+    }
   };
 
   useEffect(() => {
@@ -21,7 +22,8 @@ const Guard: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   if (!isAuth) {
     localStorage.removeItem("token-auth");
   }
-  return <div>{children}</div>;
+  console.log(isAuth);
+  return <AuthContext.Provider value={isAuth}>{children}</AuthContext.Provider>;
 };
 
 export default Guard;
