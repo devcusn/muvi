@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { API, Auth } from "aws-amplify";
-import { Box } from "@mui/material";
 
 import Layout from "../../layout/Layout";
 
-import * as queries from "../../graphql/queries";
 import Notice from "../../components/Notice/NoticeText";
 import Comment from "../../components/Comment/Comment";
+import { Flex } from "../../components/Grid/Grid";
+
+import * as queries from "../../graphql/queries";
 
 const CommentPage: React.FunctionComponent = () => {
   const [comments, setComments] = useState([]);
@@ -36,22 +37,13 @@ const CommentPage: React.FunctionComponent = () => {
 
   return (
     <Layout>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          width: "100%",
-          gap: "30px",
-          padding: "20px",
-        }}
-      >
+      <Flex matches={false}>
         {comments ? (
           commentsCard
         ) : (
           <Notice text="you don't have any commnents" />
         )}
-      </Box>
+      </Flex>
     </Layout>
   );
 };

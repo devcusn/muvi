@@ -46,6 +46,7 @@ const DetailPage: React.FunctionComponent = () => {
       console.log(err);
     }
   };
+
   const addComment = async () => {
     try {
       await API.graphql({
@@ -57,6 +58,7 @@ const DetailPage: React.FunctionComponent = () => {
       console.log(err);
     }
   };
+
   const movieService = useCallback(async () => {
     const res = await getById(movieID);
     setMovie(res.data);
@@ -74,15 +76,18 @@ const DetailPage: React.FunctionComponent = () => {
       setMessages((prev) => [...prev, message]);
     }
   };
+
   const mailProcess = async (e: any) => {
     e.preventDefault();
     const res = await sendMail(mailInput.current);
     console.log(res);
     setModal(false);
   };
+
   const messagesComponents = messages.map((m, index) => (
     <Comment message={m} key={index} />
   ));
+
   useEffect(() => {
     movieService();
     setAddFavorite(false);
@@ -184,8 +189,6 @@ const DetailPage: React.FunctionComponent = () => {
             </button>
           </Box>
         </form>
-
-        <Box sx={{ display: "flex", justifyContent: "flex-end" }}></Box>
       </BasicModal>
     </Layout>
   );

@@ -8,6 +8,7 @@ import Layout from "../../layout/Layout";
 
 import { searchGeneral } from "../../services/movies/endpoints";
 import { Movie } from "../../services/types";
+import { Flex } from "../../components/Grid/Grid";
 
 const ExplorePage: React.FunctionComponent = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -68,18 +69,10 @@ const ExplorePage: React.FunctionComponent = () => {
       }}
     />
   ));
+
   return (
     <Layout>
-      <Box
-        sx={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "20px",
-          justifyContent: "center",
-        }}
-      >
-        {movieCards}
-      </Box>
+      <Flex matches={false}>{movieCards}</Flex>
       {loader && <Notice text='Loading' />}
       {!notFound && !loader && <Notice text='Not Found' />}
     </Layout>

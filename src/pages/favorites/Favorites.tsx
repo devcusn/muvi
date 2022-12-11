@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { API, Auth } from "aws-amplify";
-import { Box, useMediaQuery } from "@mui/material";
+import { useMediaQuery } from "@mui/material";
 
 import Layout from "../../layout/Layout";
 
@@ -10,12 +10,14 @@ import { getById } from "../../services/movies/endpoints";
 import { Movie } from "../../services/types";
 import MovieCard from "../../components/MovieCard/MovieCard";
 import Notice from "../../components/Notice/NoticeText";
+import { Flex } from "../../components/Grid/Grid";
 
 const FavoritesPage: React.FunctionComponent = () => {
   const [favorites, setFavorites] = useState([]);
   const [movies, setMovies] = useState<Movie[]>([]);
   const navigate = useNavigate();
   const matches = useMediaQuery("(min-width:700px)", { noSsr: true });
+
   const getFavorites = async () => {
     const userId = (await Auth.currentAuthenticatedUser()).username;
     try {
@@ -61,23 +63,13 @@ const FavoritesPage: React.FunctionComponent = () => {
 
   return (
     <Layout>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: matches ? "row" : "column",
-          justifyContent: "space-around",
-          alignItems: matches ? "initial" : "center",
-          gap: "30px",
-          flexWrap: "wrap",
-          padding: "20px",
-        }}
-      >
+      <Flex matches={matches}>
         {favorites ? (
           favoriteMovies
         ) : (
-          <Notice text="you don't have any favorite movies" />
+          <Notice text="You don't have any favorite movies" />
         )}
-      </Box>
+      </Flex>
     </Layout>
   );
 };
