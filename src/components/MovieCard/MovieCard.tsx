@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, Box } from "@mui/material";
+import { Typography, Box, useMediaQuery } from "@mui/material";
 
 import { MovieCardProps } from "./types";
 import { Card, CardImg, Img, CardTitle } from "./MovieCard.styled";
@@ -11,8 +11,9 @@ const MovieCard: React.FunctionComponent<MovieCardProps> = ({
   type = "vertical",
   onClick,
 }) => {
+  const matches = useMediaQuery("(min-width:700px)", { noSsr: true });
   return (
-    <Card onClick={onClick} type={type}>
+    <Card onClick={onClick} type={type} responsive={matches}>
       <CardImg>
         {url !== "N/A" ? (
           <Img src={url} alt='movie film' />

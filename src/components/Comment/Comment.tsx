@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Avatar, Button } from "@mui/material";
+import { Box, Avatar, Button, useMediaQuery } from "@mui/material";
 
 import { CommentProps } from "./types";
 import { useNavigate } from "react-router-dom";
@@ -8,14 +8,16 @@ const Comment: React.FunctionComponent<CommentProps> = ({
   message,
   movieId,
 }) => {
+  const matches = useMediaQuery("(min-width:700px)", { noSsr: true });
   const navigate = useNavigate();
   return (
     <Box
       sx={{
         display: "flex",
         width: "100%",
-        maxWidth: "800px",
+        maxWidth: matches ? "800px" : "90%",
         marginTop: "20px",
+        padding: "10px",
         backgroundColor: "#202020",
       }}
     >

@@ -8,6 +8,7 @@ import {
   TextField,
   Button,
   IconButton,
+  useMediaQuery,
 } from "@mui/material";
 import { Favorite, Share } from "@mui/icons-material";
 
@@ -27,6 +28,7 @@ const DetailPage: React.FunctionComponent = () => {
   const messageComponent = useRef(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const movieID = searchParams.get("id");
+  const matches = useMediaQuery("(min-width:700px)", { noSsr: true });
 
   const addFavorite = async () => {
     setAddFavorite(true);
@@ -81,12 +83,20 @@ const DetailPage: React.FunctionComponent = () => {
     <Layout>
       <Grid container direction='column' alignItems='center'>
         {movie && (
-          <Box sx={{ display: "flex", paddings: "20px" }}>
-            <Box>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: matches ? "row" : "column",
+              justifyContent: "center",
+              paddings: "20px",
+            }}
+          >
+            <Box sx={{ display: "flex", justifyContent: "center" }}>
               <img src={movie.Poster} alt='movie poster' />
             </Box>
             <Box
               sx={{
+                marginTop: !matches ? "20px" : "0px",
                 padding: "0px 20px",
                 width: "500px",
                 display: "flex",
@@ -125,7 +135,7 @@ const DetailPage: React.FunctionComponent = () => {
           </Box>
         )}
         {!movie && <SkeletonMovieDetail />}
-        <Box sx={{ width: "100%", maxWidth: "800px", marginTop: "20px" }}>
+        <Box sx={{ width: "90%", maxWidth: "800px", marginTop: "20px" }}>
           <TextField
             sx={{ width: "100%" }}
             label='Add Your Comment'
