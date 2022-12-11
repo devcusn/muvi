@@ -8,8 +8,9 @@ import {
   IconButton,
   Autocomplete,
   Button,
+  useMediaQuery,
 } from "@mui/material";
-import { ExitToApp, Favorite } from "@mui/icons-material";
+import { Comment, ExitToApp, Favorite } from "@mui/icons-material";
 import { Auth } from "aws-amplify";
 
 import Search from "../Search/Search";
@@ -26,6 +27,7 @@ const TopBar: React.FunctionComponent<TopBarProps> = ({ pageType }) => {
   const [notFound, setNotFound] = useState(false);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const matches = useMediaQuery("(min-width:700px)", { noSsr: true });
 
   const searchGeneralServices = async (value: string) => {
     try {
@@ -75,99 +77,129 @@ const TopBar: React.FunctionComponent<TopBarProps> = ({ pageType }) => {
     <>
       <Grid
         container
-        direction='row'
-        alignItems='center'
-        sx={{ position: "fixed", padding: "20px", backgroundColor: "#131212" }}
+        sx={{
+          position: "fixed",
+          padding: "20px",
+          backgroundColor: "#131212",
+          justifyContent: "center",
+        }}
       >
-        <Box>
-          <Typography
-            sx={{ cursor: "pointer" }}
-            color='red'
-            variant='h3'
-            fontWeight='bold'
-            onClick={() => navigate("/browse")}
-          >
-            MUVI
-          </Typography>
-        </Box>
+        <Box sx={{ display: "flex", alignItems: "center", width: "100%" }}>
+          <Box>
+            <Typography
+              sx={{ cursor: "pointer" }}
+              color='red'
+              variant='h3'
+              fontWeight='bold'
+              onClick={() => navigate("/browse")}
+            >
+              MUVI
+            </Typography>
+          </Box>
 
-        <Box sx={{ flex: 2, color: "red", marginLeft: "20px" }}>
-          <Typography
+          <Box sx={{ flex: 2, color: "red", marginLeft: "20px" }}>
+            <Typography
+              sx={{
+                cursor: "pointer",
+                fontSize: "15px",
+                color: "#ffffff",
+                fontWeight: "bold",
+              }}
+            >
+              Lay Back And Watch
+            </Typography>
+          </Box>
+          {pageType !== "landing" && matches && (
+            <Box sx={{ flex: 3 }}>
+              <Autocomplete
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    placeholder='Search Movies or Series'
+                    color='secondary'
+                    sx={{ width: "100%" }}
+                    onChange={handleSearch}
+                    onClick={initSearch}
+                    ref={inputRef}
+                  />
+                )}
+                ref={inputRef}
+                options={
+                  searchResult
+                    ? searchResult?.map((opt) => opt.Title).slice(0, 2)
+                    : []
+                }
+              />
+            </Box>
+          )}
+
+          <Box
             sx={{
-              cursor: "pointer",
-              fontSize: "15px",
-              color: "#ffffff",
-              fontWeight: "bold",
+              display: "flex",
+              flex: 2,
+              justifyContent: "flex-end",
             }}
           >
-            Lay Back And Watch
-          </Typography>
-        </Box>
-        {pageType !== "landing" && (
-          <Box sx={{ flex: 3 }}>
-            <Autocomplete
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  placeholder='Search Movies or Series'
-                  color='secondary'
-                  sx={{ width: "100%" }}
-                  onChange={handleSearch}
-                  onClick={initSearch}
-                  ref={inputRef}
-                />
-              )}
-              ref={inputRef}
-              options={
-                searchResult
-                  ? searchResult?.map((opt) => opt.Title).slice(0, 2)
-                  : []
-              }
-            />
+            {pageType !== "landing" ? (
+              <>
+                <Button
+                  sx={{ fontSize: "12px", color: "red" }}
+                  startIcon={<Favorite />}
+                  onClick={() => {
+                    navigate("/favorites");
+                  }}
+                >
+                  {matches ? "Favorites" : ""}
+                </Button>
+                <Button
+                  sx={{ fontSize: "12px", color: "red" }}
+                  onClick={() => {
+                    navigate("/comments");
+                  }}
+                >
+                  {matches ? "Comments" : <Comment />}
+                </Button>
+                <IconButton
+                  onClick={() => {
+                    exit();
+                  }}
+                >
+                  <ExitToApp fontSize='large' color='error' />
+                </IconButton>
+              </>
+            ) : (
+              <Button
+                sx={{ color: "red" }}
+                onClick={() => navigate("/membership")}
+              >
+                Login
+              </Button>
+            )}
           </Box>
-        )}
-
-        <Box
-          sx={{
-            display: "flex",
-            flex: 2,
-            justifyContent: "flex-end",
-          }}
-        >
-          {pageType !== "landing" ? (
-            <>
-              <Button
-                sx={{ fontSize: "12px", color: "red" }}
-                startIcon={<Favorite />}
-                onClick={() => {
-                  navigate("/favorites");
-                }}
-              >
-                Favorites
-              </Button>
-              <Button
-                sx={{ fontSize: "12px", color: "red" }}
-                onClick={() => {
-                  navigate("/comments");
-                }}
-              >
-                Comments
-              </Button>
-              <IconButton
-                onClick={() => {
-                  exit();
-                }}
-              >
-                <ExitToApp fontSize='large' color='error' />
-              </IconButton>
-            </>
-          ) : (
-            <Button
-              sx={{ color: "red" }}
-              onClick={() => navigate("/membership")}
-            >
-              Login
-            </Button>
+        </Box>
+        <Box>
+          {pageType !== "landing" && !matches && (
+            <Box sx={{ width: "400px" }}>
+              <Autocomplete
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    placeholder='Search Movies or Series'
+                    color='secondary'
+                    sx={{ width: "100%" }}
+                    onChange={handleSearch}
+                    onClick={initSearch}
+                    ref={inputRef}
+                  />
+                )}
+                ref={inputRef}
+                options={
+                  searchResult
+                    ? searchResult?.map((opt) => opt.Title).slice(0, 2)
+                    : []
+                }
+              />
+            </Box>
           )}
         </Box>
       </Grid>

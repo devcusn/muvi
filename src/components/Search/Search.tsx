@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, Button } from "@mui/material";
+import { Box, Button, useMediaQuery } from "@mui/material";
 
 import MovieCard from "../MovieCard/MovieCard";
 import { SearchProps } from "./types";
@@ -13,6 +13,7 @@ const Search: React.FunctionComponent<SearchProps> = ({
   setActiveSearch,
 }) => {
   const navigate = useNavigate();
+  const matches = useMediaQuery("(min-width:700px)", { noSsr: true });
 
   const movieCards = movies?.map((movie) => (
     <MovieCard
@@ -34,15 +35,18 @@ const Search: React.FunctionComponent<SearchProps> = ({
         display: "flex",
         justifyContent: "center",
         position: "fixed",
-        top: "100px",
+        top: matches ? "90px" : "150px",
         width: "100%",
-        height: "100vh",
+        height: "calc(100vh - 120px)",
+        overflowY: "scroll",
         zIndex: 10,
         backgroundColor: "black",
       }}
     >
       <Box
         sx={{
+          flexDirection: !matches ? "column" : "row",
+          alignItems: "center",
           flexWrap: "wrap",
           width: "100%",
           display: "flex",
