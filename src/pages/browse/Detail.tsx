@@ -16,18 +16,22 @@ import Layout from "../../layout/Layout";
 import * as mutations from "../../graphql/mutations";
 import SkeletonMovieDetail from "../../components/Skeleton/Skeleton";
 import Comment from "../../components/Comment/Comment";
+import BasicModal from "../../components/Modal/BasicModal";
 
 import { getById } from "../../services/movies/endpoints";
 import { Movie } from "../../services/types";
+import { sendMail } from "../../services/mail/endpoints";
 
 const DetailPage: React.FunctionComponent = () => {
+  const messageComponent = useRef(null);
+  const mailInput = useRef(null);
   const [movie, setMovie] = useState<Movie>();
   const [favorite, setAddFavorite] = useState(false);
   const [messages, setMessages] = useState<string[]>([]);
   const [message, setMessage] = useState("");
-  const messageComponent = useRef(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const movieID = searchParams.get("id");
+  const [modal, setModal] = useState(false);
   const matches = useMediaQuery("(min-width:700px)", { noSsr: true });
 
   const addFavorite = async () => {
@@ -70,7 +74,12 @@ const DetailPage: React.FunctionComponent = () => {
       setMessages((prev) => [...prev, message]);
     }
   };
-
+  const mailProcess = async (e: any) => {
+    e.preventDefault();
+    const res = await sendMail(mailInput.current);
+    console.log(res);
+    setModal(false);
+  };
   const messagesComponents = messages.map((m, index) => (
     <Comment message={m} key={index} />
   ));
@@ -120,7 +129,7 @@ const DetailPage: React.FunctionComponent = () => {
                   gap: "10px",
                 }}
               >
-                <IconButton color='info'>
+                <IconButton color='info' onClick={() => setModal(true)}>
                   <Share />
                 </IconButton>
                 <Button
@@ -147,6 +156,37 @@ const DetailPage: React.FunctionComponent = () => {
         </Box>
         {messagesComponents}
       </Grid>
+      <BasicModal open={modal} onClose={() => setModal(false)}>
+        <form ref={mailInput} onSubmit={mailProcess} style={{ padding: "5px" }}>
+          <input
+            style={{ padding: "10px", width: "100%" }}
+            type='email'
+            name='user_email'
+          />
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "flex-end",
+              marginTop: "10px",
+            }}
+          >
+            <button
+              style={{
+                padding: "5px",
+                width: "100px",
+                border: "none",
+                backgroundColor: "red",
+                color: "#ffffff",
+                borderRadius: "4px",
+              }}
+            >
+              Send
+            </button>
+          </Box>
+        </form>
+
+        <Box sx={{ display: "flex", justifyContent: "flex-end" }}></Box>
+      </BasicModal>
     </Layout>
   );
 };

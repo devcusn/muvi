@@ -1,16 +1,22 @@
-import React from "react";
-import { Grid, Box } from "@mui/material";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { withAuthenticator } from "@aws-amplify/ui-react";
 
-import Authenticator from "../../components/Authenticator/Authenticator";
+import { MembershipProps } from "./types";
 
-const MembershipPage: React.FunctionComponent = () => {
-  return (
-    <Grid>
-      <Box>
-        <Authenticator />
-      </Box>
-    </Grid>
-  );
+const Membership: React.FunctionComponent<MembershipProps> = ({ user }) => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const jwtToken = user?.signInUserSession.accessToken.jwtToken;
+
+    if (jwtToken) {
+      localStorage.setItem("token-auth", jwtToken);
+      navigate("/browse");
+    }
+  }, [navigate, user]);
+
+  return <></>;
 };
 
-export default MembershipPage;
+export default withAuthenticator(Membership);

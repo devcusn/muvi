@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Box, Button, useMediaQuery } from "@mui/material";
 
 import MovieCard from "../MovieCard/MovieCard";
+import Notice from "../Notice/NoticeText";
 import { SearchProps } from "./types";
 
 const Search: React.FunctionComponent<SearchProps> = ({
@@ -37,7 +38,7 @@ const Search: React.FunctionComponent<SearchProps> = ({
         position: "fixed",
         top: matches ? "90px" : "145px",
         width: "100%",
-        height: matches ? "calc(100vh - 90px)" : "calc(100vh - 145px)",
+        height: matches ? "calc(100vh - 90px)" : "calc(100vh - 200px)",
         overflowY: "scroll",
         zIndex: 10,
         backgroundColor: "black",
@@ -58,27 +59,9 @@ const Search: React.FunctionComponent<SearchProps> = ({
         {movieCards?.length && !loading ? (
           movieCards
         ) : !notFound ? (
-          <Box
-            sx={{
-              color: "red",
-              fontSize: "20px",
-              width: "100%",
-              textAlign: "center",
-            }}
-          >
-            There is no result
-          </Box>
+          <Notice text='There is no result' />
         ) : (
-          <Box
-            sx={{
-              color: "red",
-              fontSize: "20px",
-              width: "100%",
-              textAlign: "center",
-            }}
-          >
-            Loading
-          </Box>
+          <Notice text='Loading' />
         )}
         {movieCards && (
           <Button
