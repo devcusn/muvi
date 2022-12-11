@@ -10,6 +10,7 @@ const Comment: React.FunctionComponent<CommentProps> = ({
 }) => {
   const matches = useMediaQuery("(min-width:700px)", { noSsr: true });
   const navigate = useNavigate();
+
   return (
     <Box
       sx={{
