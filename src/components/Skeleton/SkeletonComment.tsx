@@ -3,11 +3,14 @@ import { Box, Skeleton } from "@mui/material";
 
 import { range } from "../../app/helper/range";
 
-const SkeletonCard: React.FunctionComponent<{ amount?: number }> = ({
+const SkeletonComment: React.FunctionComponent<{ amount?: number }> = ({
   amount = 1,
 }) => {
   const skeleton = range(amount).map((skeleton) => (
-    <Skeleton variant='rectangular' width={200} height={300} />
+    <Skeleton
+      variant='rectangular'
+      sx={{ padding: "40px", maxWidth: "800px", width: "80%" }}
+    />
   ));
   return (
     <Box
@@ -23,4 +26,4 @@ const SkeletonCard: React.FunctionComponent<{ amount?: number }> = ({
   );
 };
 
-export default SkeletonCard;
+export default SkeletonComment;

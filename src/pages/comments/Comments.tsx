@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { API, Auth } from "aws-amplify";
 
 import Layout from "../../layout/Layout";
-
 import Notice from "../../components/Notice/NoticeText";
+import SkeletonComment from "../../components/Skeleton/SkeletonComment";
 import Comment from "../../components/Comment/Comment";
 import { Flex } from "../../components/Grid/Grid";
 
@@ -11,6 +11,7 @@ import * as queries from "../../graphql/queries";
 
 const CommentPage: React.FunctionComponent = () => {
   const [comments, setComments] = useState([]);
+  const [loader, setLoader] = useState(true);
 
   const getComments = async () => {
     const userId = (await Auth.currentAuthenticatedUser()).username;
@@ -21,6 +22,7 @@ const CommentPage: React.FunctionComponent = () => {
         variables: { owner: userId },
         authMode: "AMAZON_COGNITO_USER_POOLS",
       });
+      setLoader(false);
       setComments((messages as any).data.listMessages.items);
     } catch (err) {
       console.log(err);
@@ -37,6 +39,7 @@ const CommentPage: React.FunctionComponent = () => {
 
   return (
     <Layout>
+      {loader && <SkeletonComment amount={10} />}
       <Flex matches={false}>
         {comments ? (
           commentsCard

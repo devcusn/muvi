@@ -11,10 +11,12 @@ import { Movie } from "../../services/types";
 import MovieCard from "../../components/MovieCard/MovieCard";
 import Notice from "../../components/Notice/NoticeText";
 import { Flex } from "../../components/Grid/Grid";
+import SkeletonCard from "../../components/Skeleton/SkeletonCard";
 
 const FavoritesPage: React.FunctionComponent = () => {
   const [favorites, setFavorites] = useState([]);
   const [movies, setMovies] = useState<Movie[]>([]);
+  const [loader, setLoader] = useState(true);
   const navigate = useNavigate();
   const matches = useMediaQuery("(min-width:700px)", { noSsr: true });
 
@@ -26,6 +28,7 @@ const FavoritesPage: React.FunctionComponent = () => {
         variables: { owner: userId },
         authMode: "AMAZON_COGNITO_USER_POOLS",
       });
+      setLoader(false);
       setFavorites((favorites as any).data.listFavoriteMovies.items);
     } catch (err) {
       console.log(err);
@@ -64,6 +67,7 @@ const FavoritesPage: React.FunctionComponent = () => {
   return (
     <Layout>
       <Flex matches={matches}>
+        {loader && <SkeletonCard amount={20} />}
         {favorites ? (
           favoriteMovies
         ) : (

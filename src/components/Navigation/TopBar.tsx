@@ -44,6 +44,7 @@ const TopBar: React.FunctionComponent<TopBarProps> = ({ pageType }) => {
       console.log(err);
     }
   };
+
   const exit = async () => {
     try {
       await Auth.signOut();
@@ -52,7 +53,9 @@ const TopBar: React.FunctionComponent<TopBarProps> = ({ pageType }) => {
       console.log("error signing out: ", error);
     }
   };
+
   const handleSearch = () => {
+    setLoading(true);
     const value = (
       inputRef.current?.children[0].children[0].children[0] as HTMLInputElement
     ).value;
@@ -61,7 +64,9 @@ const TopBar: React.FunctionComponent<TopBarProps> = ({ pageType }) => {
       setActiveSearch(false);
     } else {
       setSearch(value);
-      searchGeneralServices(value);
+      setTimeout(() => {
+        searchGeneralServices(value);
+      }, 700);
       setActiveSearch(true);
     }
   };

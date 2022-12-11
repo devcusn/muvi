@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, Button, useMediaQuery } from "@mui/material";
 
 import MovieCard from "../MovieCard/MovieCard";
 import Notice from "../Notice/NoticeText";
+import SkeletonCard from "../Skeleton/SkeletonCard";
 import { SearchProps } from "./types";
 
 const Search: React.FunctionComponent<SearchProps> = ({
@@ -56,6 +57,7 @@ const Search: React.FunctionComponent<SearchProps> = ({
           height: "min-content",
         }}
       >
+        {loading && <SkeletonCard amount={20} />}
         {movieCards?.length && !loading ? (
           movieCards
         ) : !notFound ? (

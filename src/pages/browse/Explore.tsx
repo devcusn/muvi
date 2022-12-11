@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import { Box } from "@mui/material";
 
 import MovieCard from "../../components/MovieCard/MovieCard";
 import Notice from "../../components/Notice/NoticeText";
@@ -9,6 +8,7 @@ import Layout from "../../layout/Layout";
 import { searchGeneral } from "../../services/movies/endpoints";
 import { Movie } from "../../services/types";
 import { Flex } from "../../components/Grid/Grid";
+import SkeletonCard from "../../components/Skeleton/SkeletonCard";
 
 const ExplorePage: React.FunctionComponent = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -50,7 +50,9 @@ const ExplorePage: React.FunctionComponent = () => {
   });
 
   useEffect(() => {
-    searchListService();
+    setTimeout(() => {
+      searchListService();
+    }, 700);
   }, [page, searchListService]);
 
   useEffect(() => {
@@ -72,8 +74,8 @@ const ExplorePage: React.FunctionComponent = () => {
 
   return (
     <Layout>
-      <Flex matches={false}>{movieCards}</Flex>
-      {loader && <Notice text='Loading' />}
+      <Flex matches={true}>{movieCards}</Flex>
+      {loader && <SkeletonCard amount={14} />}
       {!notFound && !loader && <Notice text='Not Found' />}
     </Layout>
   );
