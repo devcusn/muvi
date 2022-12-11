@@ -1,22 +1,11 @@
 import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  Box,
-  Grid,
-  Typography,
-  Button,
-  styled,
-  useMediaQuery,
-} from "@mui/material";
+import { Box, Typography, Button, useMediaQuery } from "@mui/material";
 
-import image from "../../assets/img/background.png";
 import Layout from "../../layout/Layout";
 import AuthContext from "../../context/AuthContext";
-
-const Background = styled("div")({
-  backgroundImage: `url(${image})`,
-  minHeight: "100vh",
-});
+import { Center } from "../../components/Grid/Grid";
+import { Background } from "./Landing.style";
 
 const LandingPage: React.FunctionComponent = () => {
   const auth = useContext(AuthContext);
@@ -32,17 +21,7 @@ const LandingPage: React.FunctionComponent = () => {
   return (
     <Layout pageType='landing'>
       <Background>
-        <Grid
-          sx={{
-            background: "rgba(0,0,0,0.5)",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            width: "100%",
-            height: "100vh",
-          }}
-        >
+        <Center>
           <Typography
             variant={matches ? "h1" : "h4"}
             sx={{ color: "red", fontWeight: "bold" }}
@@ -74,7 +53,7 @@ const LandingPage: React.FunctionComponent = () => {
               Are you student ?
             </Button>
           </Box>
-        </Grid>
+        </Center>
       </Background>
     </Layout>
   );
