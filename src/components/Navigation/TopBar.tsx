@@ -89,26 +89,27 @@ const TopBar: React.FunctionComponent<TopBarProps> = ({ pageType }) => {
             <Typography
               sx={{ cursor: "pointer" }}
               color='red'
-              variant='h3'
+              variant={matches ? "h3" : "h5"}
               fontWeight='bold'
               onClick={() => navigate("/browse")}
             >
               MUVI
             </Typography>
           </Box>
-
-          <Box sx={{ flex: 2, color: "red", marginLeft: "20px" }}>
-            <Typography
-              sx={{
-                cursor: "pointer",
-                fontSize: "15px",
-                color: "#ffffff",
-                fontWeight: "bold",
-              }}
-            >
-              Lay Back And Watch
-            </Typography>
-          </Box>
+          {matches && (
+            <Box sx={{ flex: 2, color: "red", marginLeft: "20px" }}>
+              <Typography
+                sx={{
+                  cursor: "pointer",
+                  fontSize: "15px",
+                  color: "#ffffff",
+                  fontWeight: "bold",
+                }}
+              >
+                Lay Back And Watch
+              </Typography>
+            </Box>
+          )}
           {pageType !== "landing" && matches && (
             <Box sx={{ flex: 3 }}>
               <Autocomplete
@@ -143,7 +144,10 @@ const TopBar: React.FunctionComponent<TopBarProps> = ({ pageType }) => {
             {pageType !== "landing" ? (
               <>
                 <Button
-                  sx={{ fontSize: "12px", color: "red" }}
+                  sx={{
+                    fontSize: "12px",
+                    color: "red",
+                  }}
                   startIcon={<Favorite />}
                   onClick={() => {
                     navigate("/favorites");
@@ -152,7 +156,10 @@ const TopBar: React.FunctionComponent<TopBarProps> = ({ pageType }) => {
                   {matches ? "Favorites" : ""}
                 </Button>
                 <Button
-                  sx={{ fontSize: "12px", color: "red" }}
+                  sx={{
+                    fontSize: "12px",
+                    color: "red",
+                  }}
                   onClick={() => {
                     navigate("/comments");
                   }}
@@ -179,7 +186,7 @@ const TopBar: React.FunctionComponent<TopBarProps> = ({ pageType }) => {
         </Box>
         <Box>
           {pageType !== "landing" && !matches && (
-            <Box sx={{ width: "400px" }}>
+            <Box sx={{ width: "370px" }}>
               <Autocomplete
                 renderInput={(params) => (
                   <TextField
