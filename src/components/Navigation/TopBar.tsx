@@ -48,6 +48,7 @@ const TopBar: React.FunctionComponent<TopBarProps> = ({ pageType }) => {
   const exit = async () => {
     try {
       await Auth.signOut();
+      localStorage.removeItem("token-auth");
       navigate("/");
     } catch (error) {
       console.log("error signing out: ", error);
